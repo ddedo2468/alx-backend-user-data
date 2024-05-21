@@ -4,6 +4,7 @@
 from api.v1.auth.auth import Auth
 import base64
 
+
 class BasicAuth(Auth):
     """BasicAuth Class inherits from Auth"""
     def extract_base64_authorization_header(
@@ -33,5 +34,3 @@ class BasicAuth(Auth):
             return decoded_bytes.decode('utf-8')
         except Exception:
             return None
-
-
