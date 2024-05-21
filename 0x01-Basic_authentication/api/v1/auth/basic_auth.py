@@ -65,7 +65,6 @@ class BasicAuth(Auth):
                 return users[0]
         return None
 
-
     def current_user(self, request=None) -> TypeVar('User'):
         """ overloads Auth and retrieves the User instance for a reques """
         if request is None:
