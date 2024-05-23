@@ -30,8 +30,6 @@ if auth_type == "session_auth":
     auth = SessionAuth()
 
 
-
-
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     """unauthorized handler"""
