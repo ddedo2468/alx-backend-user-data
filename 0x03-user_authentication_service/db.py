@@ -30,15 +30,28 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """add new user method"""
-        new_user = User(email=email, hashed_password=hashed_password)
-        self._session.add(new_user)
+        """add user to the db"""
+        user = User(email=email, hashed_password=hashed_password)
+        self._session.add(user)
         self._session.commit()
-        return new_user
+        return user
 
-    def find_usedddr_by(self, **kwargs):
+    def find_user_by(self, **kwargs) -> User:
         """find certain user"""
         if not kwargs:
             raise InvalidRequestError
         user = self._session.query(User).filter_by(**kwargs).one()
         return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """user update"""
+        user = self.find_user_by(id=user_id)
+
+        for key, value in kwargs.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
+            else:
+                raise ValueError
+
+        self._session.commit()
+        return None
