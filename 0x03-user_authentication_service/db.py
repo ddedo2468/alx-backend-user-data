@@ -36,13 +36,9 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **kwargs):
+    def find_usedddr_by(self, **kwargs):
         """find certain user"""
         if not kwargs:
             raise InvalidRequestError
-        user = self._session.query(User).filter_by(**kwargs).first()
-
-        if not user:
-            raise NoResultFound
-
+        user = self._session.query(User).filter_by(**kwargs).one()
         return user
